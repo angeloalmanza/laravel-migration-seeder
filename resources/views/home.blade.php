@@ -1,33 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trains</title>
-</head>
-<body>
-    <h1>Lista treni in partenza</h1>
+@extends('layout/app')
 
-    @foreach($trains as $train)
-    <ul>
-        <li><strong>Azienda:</strong> {{ $train->azienda }}</li>
-        <li><strong>Stazione di partenza:</strong> {{ $train->stazione_partenza }}</li>
-        <li><strong>Stazione di arrivo:</strong> {{ $train->stazione_arrivo }}</li>
-        <li><strong>Orario di partenza:</strong> {{ $train->orario_partenza }}</li>
-        <li><strong>Orario di arrivo:</strong> {{ $train->orario_arrivo }}</li>
-        <li><strong>Codice treno:</strong> {{ $train->codice_treno }}</li>
-        <li><strong>Totale carrozze:</strong> {{ $train->totale_carrozze }}</li>
-        <li><strong>Stato:</strong> 
-            @if($train->cancellato)
-                Cancellato
-            @elseif(!$train->in_orario)
-                In ritardo
-            @else
-                In orario
-            @endif
-        </li>
-    </ul>
-    <hr>
-    @endforeach
-</body>
-</html>
+@section('contenuto')
+    <div class="container">
+        <div class="row row-cols-1">
+            @foreach($trains as $train)
+                <div class="col mb-5">
+                <div class="card">
+                      <div class="card-header bg-danger text-white">
+                        {{ $train->azienda }}
+                      </div>
+                      <div class="card-body d-flex justify-content-between aign-items-center">
+                        <div>
+                            <h5 class="card-title">{{ $train->stazione_partenza }}</h5>
+                            <h6 class="card-text">{{ $train->orario_partenza }}</h6>
+                        </div>
+                        <div>
+                            <h5 class="card-title">{{ $train->stazione_arrivo }}</h5>
+                            <h6 class="card-text">{{ $train->orario_arrivo }}</h6>
+                        </div>
+                        <p><strong>Codice treno</strong><br>{{ $train->codice_treno }}</p>
+                        <p><strong>Totale carrozze</strong><br>{{ $train->totale_carrozze }}</p>
+                        <p><strong>Stato</strong><br> 
+                            @if($train->cancellato)
+                                Cancellato
+                            @elseif(!$train->in_orario)
+                                In ritardo
+                            @else
+                                In orario
+                            @endif
+                        </p>
+                      </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+@endsection
