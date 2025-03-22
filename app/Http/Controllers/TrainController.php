@@ -10,12 +10,14 @@ use Carbon\Carbon;
 class TrainController extends Controller
 {
     public function index () {
-        $today = Carbon::today();
+        // $today = Carbon::today();
 
-        // Recuperiamo i treni con partenza dalla data odierna in avanti, ordinati per orario di partenza
-        $trains = Train::where('orario_partenza', '>=', $today)
-                        ->orderBy('orario_partenza', 'asc')
-                        ->get();
+        // // Recuperiamo i treni con partenza dalla data odierna in avanti, ordinati per orario di partenza
+        // $trains = Train::where('orario_partenza', '>=', $today)
+        //                 ->orderBy('orario_partenza', 'asc')
+        //                 ->get();
+
+        $trains = Train::all();
 
         return view('home', compact('trains'));
     }
